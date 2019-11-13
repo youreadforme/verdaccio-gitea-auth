@@ -1,0 +1,56 @@
+{
+  "name": "verdaccio-gitea-auth",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "author": "Tony Crowe <npm@tonycrowe.com> (https://github.com/tcrowe)",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "superagent": "^5.1.0",
+    "url-join": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "remark-cli": "^7.0.1",
+    "remark-lint": "^6.0.5",
+    "remark-toc": "^6.0.0",
+    "should": "^13.2.3",
+    "verdaccio": "^4.3.4"
+  },
+  "scripts": {
+    "test": "mocha",
+    "setup": "ln -s $PWD node_modules/verdaccio-gitea-auth || true",
+    "dev-eslint": "nodemon -q -d 1 -w src -w test --exec 'eslint --cache --format unix {src,test}' || true",
+    "dev-test": "nodemon -q -d 1.5 -w src -w test --exec 'mocha' || true",
+    "dev-verdaccio": "verdaccio --config ./test/verdaccio.yml || true",
+    "dev": "run-s setup && run-p 'dev-*'",
+    "prd-eslint": "eslint --format unix '{src,test}/**/*.js'",
+    "prd-remark": "remark . -o",
+    "prd": "run-s 'prd-*' test"
+  },
+  "remarkConfig": {
+    "settings": {
+      "bullet": "+",
+      "listItemIndent": 1,
+      "fences": true,
+      "emphasis": "*"
+    },
+    "plugins": [
+      "lint",
+      [
+        "toc",
+        {
+          "tight": true
+        }
+      ]
+    ],
+    "output": true
+  }
+}

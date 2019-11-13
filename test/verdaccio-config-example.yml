@@ -1,0 +1,35 @@
+# verdaccio private npm registry config
+# Look here for more config file examples:
+# https://github.com/verdaccio/verdaccio/tree/master/conf
+
+listen:
+  - 127.0.0.1:16361
+
+storage: ./storage
+
+web:
+  enable: true
+  title: verdaccio
+  scope: "@your-scope"
+
+# url_prefix: /uri-if-not-root/
+
+auth:
+  gitea-auth:
+    url: http://url-to-my-gitea-server
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org
+
+packages:
+  "@your-scope/*":
+    access: $authenticated
+    publish: $authenticated
+  "**":
+    access: $authenticated
+    publish: $authenticated
+    proxy: npmjs
+
+logs:
+  - { type: stdout, format: pretty, level: error }

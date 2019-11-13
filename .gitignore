@@ -1,0 +1,4 @@
+.eslintcache
+node_modules
+test/storage
+test/verdaccio.yml
