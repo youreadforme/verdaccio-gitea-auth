@@ -25,7 +25,14 @@ In your verdaccio config file YAML:
 auth:
   gitea-auth:
     url: https://url-to-your-gitea-server
+    defaultOrg: gitea
 ```
+
+`gitea-auth.url` is not the api to the URl but just the server itself. Underneath we're concatenating `/api/v1/user/orgs`. If no orgs are in the list it defaults to `["gitea"]`.
+
+The groups correspond to verdaccio groups that restrict access to scopes. <https://verdaccio.org/docs/en/authentification#understanding-groups>
+
+We don't have user feedback how this is used in the wild so if you have a specific need please file an issue and we'll help you figure it out.
 
 Want to generate an auth token?
 

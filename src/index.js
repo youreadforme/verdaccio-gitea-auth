@@ -22,17 +22,21 @@ auth:
  * @returns {object}
  */
 function verdaccioGiteaAuth(authConfig /*, appConfig */) {
+  // without an org login doesn't really work
+  const defaultOrg = authConfig || "gitea";
+
+  // required gitea url
   assert.equal(isString(authConfig.url), true, authConfigHelper);
 
   /**
-   * Get the teams (organizations) that the user is assigned
+   * Get the organizations that the user is assigned
    * @param {string} username
    * @param {string} password
    * @param {function} done
    */
   function getUserOrgs({ username, password }, done) {
     superagent
-      .get(urlJoin(authConfig.url, `/api/v1/users/${username}/orgs`))
+      .get(urlJoin(authConfig.url, `/api/v1/user/orgs`))
       .accept("json")
       .auth(username, password)
       .end(function(err, res) {
@@ -41,10 +45,11 @@ function verdaccioGiteaAuth(authConfig /*, appConfig */) {
           console.log("error getting user teams", message, stack, status);
           return done(err);
         }
-        return done(
-          null,
-          res.body.map(item => item.username)
-        );
+        const op = res.body.map(item => item.username);
+        if (op.length === 0) {
+          op.push(defaultOrg);
+        }
+        return done(null, op);
       });
   }
 
