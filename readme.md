@@ -37,7 +37,7 @@ We don't have user feedback how this is used in the wild so if you have a specif
 Want to generate an auth token?
 
 ```sh
-npm login --registry=https://url-to-your-gitea-server
+npm login --registry=https://url-to-your-verdaccio-server:1234
 ```
 
 ## Development
