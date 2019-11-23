@@ -1,6 +1,6 @@
 {
   "name": "verdaccio-gitea-auth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "author": "Tony Crowe <npm@tonycrowe.com> (https://github.com/tcrowe)",
   "license": "MIT",
