@@ -23,7 +23,7 @@ auth:
  */
 function verdaccioGiteaAuth(authConfig /*, appConfig */) {
   // without an org login doesn't really work
-  const defaultOrg = authConfig || "gitea";
+  const defaultOrg = authConfig.defaultOrg || "gitea";
 
   // required gitea url
   assert.equal(isString(authConfig.url), true, authConfigHelper);
