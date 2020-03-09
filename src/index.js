@@ -36,7 +36,7 @@ function verdaccioGiteaAuth(authConfig /*, appConfig */) {
    */
   function getUserOrgs({ username, password }, done) {
     superagent
-      .get(urlJoin(authConfig.url, `/api/v1/user/orgs`))
+      .get(urlJoin(authConfig.url, "/api/v1/user/orgs"))
       .accept("json")
       .auth(username, password)
       .end(function(err, res) {

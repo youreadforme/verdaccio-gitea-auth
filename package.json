@@ -2,7 +2,7 @@
   "name": "verdaccio-gitea-auth",
   "version": "0.1.3",
   "description": "",
-  "author": "Tony Crowe <npm@tonycrowe.com> (https://github.com/tcrowe)",
+  "author": "Tony Crowe (https://tcrowe.commons.host/contact)",
   "license": "MIT",
   "homepage": "https://github.com/youreadforme/verdaccio-gitea-auth#readme",
   "repository": {
@@ -19,14 +19,14 @@
   "main": "src/index.js",
   "dependencies": {
     "lodash": "^4.17.15",
-    "superagent": "^5.2.1",
+    "superagent": "^5.2.2",
     "url-join": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "mocha": "^7.0.1",
+    "mocha": "^7.1.0",
     "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
@@ -34,18 +34,18 @@
     "remark-lint": "^6.0.5",
     "remark-toc": "^7.0.0",
     "should": "^13.2.3",
-    "verdaccio": "^4.4.2"
+    "verdaccio": "^4.4.4"
   },
   "scripts": {
     "test": "mocha",
     "setup": "ln -s $PWD node_modules/verdaccio-gitea-auth || true",
-    "dev-eslint": "nodemon -q -d 1 -w src -w test --exec 'eslint --cache --format unix {src,test}' || true",
+    "dev-eslint": "nodemon -q -d 1 -w src -w test --exec 'eslint --cache --fix --format unix {src,test}' || true",
     "dev-test": "nodemon -q -d 1.5 -w src -w test --exec 'mocha' || true",
     "dev-verdaccio": "verdaccio --config ./test/verdaccio.yml || true",
-    "dev": "run-s setup && run-p 'dev-*'",
-    "prd-eslint": "eslint --format unix '{src,test}/**/*.js'",
+    "dev": "run-s -s setup && run-p -s 'dev-*'",
+    "prd-eslint": "eslint --fix --format unix '{src,test}/**/*.js'",
     "prd-remark": "remark . -o",
-    "prd": "run-s 'prd-*' test"
+    "prd": "run-s -s 'prd-*' test"
   },
   "remarkConfig": {
     "settings": {
@@ -64,5 +64,16 @@
       ]
     ],
     "output": true
+  },
+  "mocha": {
+    "colors": true,
+    "reporter": "spec",
+    "ui": "bdd",
+    "bail": true,
+    "fullTrade": true,
+    "exit": true,
+    "require": [
+      "should"
+    ]
   }
 }
